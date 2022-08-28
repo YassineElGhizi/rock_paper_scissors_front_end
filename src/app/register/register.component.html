@@ -1,0 +1,53 @@
+<div class="container" style="height: 100vh">
+  <div class="row justify-content-center align-items-center" style="height: 100vh">
+    <div class="card col-sm-6">
+      <div class="card-body">
+        <h5 class="card-title">Register</h5>
+        <form>
+          <div class="alert alert-danger" role="alert" *ngIf="error.key == 'user_name'">
+            <span>{{error.msg}}</span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">User Name</label>
+            <input type="text" class="form-control" #user_name>
+            <div id="emailHelp" class="form-text text-sm-start">Please choose a good username as it will be <strong>shared</strong>.
+            </div>
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="error.key == 'password'">
+            <span>{{error.msg}}</span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" #password>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" #confirm_password>
+          </div>
+          <div class="row">
+            <div>
+              <a class="btn btn-primary col-sm-12"
+                 (click)="create_account(user_name.value, password.value , confirm_password.value)">Create Account</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+  *ngIf="http_error.status"
+  text="Error"
+  [title]="http_error.msg"
+  [swalFireOnInit]="true"
+  icon="error">
+</swal>
+
+<swal
+  *ngIf="acount_created"
+  text="Success"
+  title="Acount Has Been Created"
+  [swalFireOnInit]="true"
+  icon="success">
+</swal>

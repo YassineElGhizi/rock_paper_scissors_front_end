@@ -1,0 +1,28 @@
+<div class="container" style="height: 100vh">
+  <div class="row justify-content-center align-items-center" style="height: 100vh">
+    <div class="card col-sm-6">
+      <div class="card-body">
+        <h5 class="card-title">LogIn</h5>
+        <div class="mb-3">
+          <label class="form-label">User Name</label>
+          <input type="text" class="form-control" [(ngModel)]="user_name">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" [(ngModel)]="passwd">
+        </div>
+        <div class="mb-3">
+          <div class="form-text">Dont Have An Account ?</div>
+          <a routerLink="/register">Register</a>
+        </div>
+        <div class="row">
+          <div>
+            <button class="btn btn-primary col-sm-12">LogIn</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
