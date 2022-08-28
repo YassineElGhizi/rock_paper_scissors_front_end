@@ -19,6 +19,12 @@ export class LoginComponent implements OnInit {
     this.loginService.currentPasswd.subscribe(pswd => this.passwd = pswd);
   }
 
+
+  public login() {
+    this.loginService.postData(this.user_name, this.passwd)
+  }
+
+
   ngOnInit(): void {
   }
 
