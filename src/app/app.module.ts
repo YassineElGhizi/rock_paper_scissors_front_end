@@ -1,26 +1,29 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { LoginComponent } from './login/login.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {StoreModule} from '@ngrx/store';
+import {reducers, metaReducers} from './reducers';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
+import {LoginComponent} from './login/login.component';
 
 import {RouterModule, Routes} from '@angular/router';
-import { RegisterComponent } from './register/register.component';
+import {RegisterComponent} from './register/register.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
+import {HomeComponent} from './home/home/home.component';
+import {NavbarComponent} from './home/home/navbar/navbar.component';
+import {GameComponent} from './home/home/game/game.component';
 
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'home', component: HomeComponent},
 
 ];
 
@@ -29,6 +32,9 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    HomeComponent,
+    NavbarComponent,
+    GameComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,9 +48,10 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     SweetAlert2Module.forRoot(),
-    SweetAlert2Module
+    SweetAlert2Module,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -26,3 +26,10 @@
 </div>
 
 
+<swal
+  *ngIf="http_error.status"
+  text="Error"
+  [title]="http_error.msg"
+  [swalFireOnInit]="true"
+  icon="error">
+</swal>

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from "./service/login.service";
+import {HttpError} from "../models/http-error";
 
 @Component({
   selector: 'app-login',
@@ -8,15 +9,22 @@ import {LoginService} from "./service/login.service";
 })
 export class LoginComponent implements OnInit {
 
-  user_name?: string;
-  passwd?: string;
-  token?: string;
-  img?: string;
-
+  public user_name?: string;
+  public passwd?: string;
+  public token?: string;
+  public img?: string;
+  public http_error = new HttpError(false, 'some error');
 
   constructor(public loginService: LoginService) {
     this.loginService.currentUserName.subscribe(n => this.user_name = n);
     this.loginService.currentPasswd.subscribe(pswd => this.passwd = pswd);
+
+    this.loginService.currentHttp_error.subscribe(he => {
+      this.http_error.status = he.status;
+      this.http_error.msg = he.msg;
+    })
+
+
   }
 
 

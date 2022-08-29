@@ -1,8 +1,14 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {HttpError} from "../../models/http-error";
+import {select, Store} from "@ngrx/store";
+import {LoginState} from "../store/reducer/login.reducer";
+import {selectLogin} from "../store/selector/login.selectors";
+import {User} from "../../models/user";
+import {addLogin} from "../store/action/login.actions";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Injectable({
@@ -15,12 +21,14 @@ export class LoginService {
   public passwd = new BehaviorSubject('');
   currentPasswd = this.passwd.asObservable();
 
+  user$: Observable<User>;
 
   public http_error = new BehaviorSubject(new HttpError(false, 'some error'));
   currentHttp_error = this.http_error.asObservable();
 
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private store: Store<LoginState>, private route: ActivatedRoute, private router: Router) {
+    this.user$ = this.store.pipe(select(selectLogin))
   }
 
 
@@ -40,20 +48,24 @@ export class LoginService {
     this.http.post(environment.base_api_url + 'login', body, {'headers': headers, observe: 'response'})
       .subscribe(
         response => {
-          console.log("POST SUCCESS /login", response)
           this.setHttpError(false, '')
+          console.log("data", response.body)
+          let u = response.body as User;
+          this.store.dispatch(addLogin(u));
+          this.router.navigate(['/home'])
         },
         error => {
           console.log("Post failed /login with the errors", error);
           this.setHttpError(true, 'Network Error')
-          this.setHttpError(true, 'Username Already Exists')
+          if (error.status == 401) {
+            console.log("Wrong Credentials !!");
+            this.setHttpError(true, 'Wrong Credentials !!')
+          }
+
           setTimeout(() => {
             this.setHttpError(false, '')
-          }, 1000)
-          if (error.status == 409) {
-            console.log("User Name Already Exists");
-            this.setHttpError(true, 'Username Already Exists')
-          }
+          }, 1500)
+
         },
       )
   }
