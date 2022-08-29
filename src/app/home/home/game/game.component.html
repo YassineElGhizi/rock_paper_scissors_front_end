@@ -1,11 +1,27 @@
 <div class="container-xxl">
   <div class="row mt-4">
-    <div class="col-sm-12 col-lg-5">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur cum et ipsa minima sint! A, blanditiis
-      delectus, deserunt dicta ipsa non pariatur perferendis quasi quibusdam ratione reprehenderit sint unde veritatis.
+    <h3>Statistics</h3>
+    <div class="col-sm-12 col-lg-5 d-flex justify-content-center">
+      <div style="width: 15rem;height: 15rem" class="">
+        <canvas id="canvas">{{chart}}</canvas>
+      </div>
+    </div>
 
+    <div class="col-sm-12 col-lg-7">
+      <div class="row">
+        <h6>Tolale Games :  </h6> <span class="badge bg-secondary">32 Game</span>
+
+      </div>
+      <div class="row">
+        <div class="col-4">Win : <span class="badge bg-success">12</span></div>
+        <div class="col-4">Draw : <span class="badge bg-warning text-dark">19</span></div>
+        <div class="col-4">Lose : <span class="badge bg-danger">3</span></div>
+      </div>
     </div>
   </div>
+
+  <app-play></app-play>
+
 </div>
 
 

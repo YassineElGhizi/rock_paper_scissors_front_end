@@ -18,6 +18,8 @@ import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import {HomeComponent} from './home/home/home.component';
 import {NavbarComponent} from './home/home/navbar/navbar.component';
 import {GameComponent} from './home/home/game/game.component';
+import { PlayComponent } from './home/home/game/play/play.component';
+
 
 
 const appRoutes: Routes = [
@@ -35,6 +37,8 @@ const appRoutes: Routes = [
     HomeComponent,
     NavbarComponent,
     GameComponent,
+    PlayComponent,
+
   ],
   imports: [
     BrowserModule,
