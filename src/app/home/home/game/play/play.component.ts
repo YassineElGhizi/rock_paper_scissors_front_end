@@ -11,6 +11,7 @@ export class PlayComponent implements OnInit {
   resutls = {'txt': '', 'color': ''};
   hide_vs = false;
   bot_choice = -1;
+  last_win = false;
 
 
   constructor() {
@@ -43,42 +44,51 @@ export class PlayComponent implements OnInit {
         if (this.bot_choice == 1) {
           this.resutls.color = 'black'
           this.resutls.txt = 'Draw +0'
+          this.last_win = false
         }
         if (this.bot_choice == 2) {
           this.resutls.color = 'red'
           this.resutls.txt = 'Lost -1'
+          this.last_win = false
         }
         if (this.bot_choice == 3) {
           this.resutls.color = 'green'
           this.resutls.txt = 'WIN +1'
+          this.last_win = true
         }
         break;
       case 2:
         if (this.bot_choice == 2) {
           this.resutls.color = 'black'
           this.resutls.txt = 'Draw +0'
+          this.last_win = false
         }
         if (this.bot_choice == 3) {
           this.resutls.color = 'red'
           this.resutls.txt = 'Lost -1'
+          this.last_win = false
         }
         if (this.bot_choice == 1) {
           this.resutls.color = 'green'
           this.resutls.txt = 'WIN +1'
+          this.last_win = true
         }
         break;
       case 3:
         if (this.bot_choice == 3) {
           this.resutls.color = 'black'
           this.resutls.txt = 'Draw +0'
+          this.last_win = false
         }
         if (this.bot_choice == 1) {
           this.resutls.color = 'red'
           this.resutls.txt = 'Lost -1'
+          this.last_win = false
         }
         if (this.bot_choice == 2) {
           this.resutls.color = 'green'
           this.resutls.txt = 'WIN +1'
+          this.last_win = true
         }
         break;
       default:
