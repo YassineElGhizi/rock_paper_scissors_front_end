@@ -8,6 +8,10 @@ import {Component, OnInit} from '@angular/core';
 export class PlayComponent implements OnInit {
 
   counter = -1;
+  resutls = {'txt': '', 'color': ''};
+  hide_vs = false;
+  bot_choice = -1;
+
 
   constructor() {
   }
@@ -16,30 +20,78 @@ export class PlayComponent implements OnInit {
   }
 
   public async play(ch: number) {
+    this.hide_vs = true
     this.counter = 3
+    this.resutls = {'txt': '', 'color': ''};
 
-    // setTimeout(() => {
-    //   this.decrese()
-    // }, 1000)
-    // setTimeout(() => {
-    //   this.decrese()
-    // }, 2000)
-    // setTimeout(() => {
-    //   this.decrese()
-    // }, 3000)
-    // setTimeout(() => {
-    //   alert(a)
-    // }, 4000)
-
-
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       await this.fx_fost_fx()
     }
 
+    console.log('1: ', this.bot_choice)
+    await this.bot_generate()
+    console.log('2: ', this.bot_choice)
+    await this.my_switch_case(ch)
+    console.log('3: ', this.bot_choice)
 
-    let a = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-    alert(a)
+
   }
+
+  public my_switch_case(x: number) {
+    switch (x) {
+      case 1:
+        if (this.bot_choice == 1) {
+          this.resutls.color = 'black'
+          this.resutls.txt = 'Draw +0'
+        }
+        if (this.bot_choice == 2) {
+          this.resutls.color = 'red'
+          this.resutls.txt = 'Lost -1'
+        }
+        if (this.bot_choice == 3) {
+          this.resutls.color = 'green'
+          this.resutls.txt = 'WIN +1'
+        }
+        break;
+      case 2:
+        if (this.bot_choice == 2) {
+          this.resutls.color = 'black'
+          this.resutls.txt = 'Draw +0'
+        }
+        if (this.bot_choice == 3) {
+          this.resutls.color = 'red'
+          this.resutls.txt = 'Lost -1'
+        }
+        if (this.bot_choice == 1) {
+          this.resutls.color = 'green'
+          this.resutls.txt = 'WIN +1'
+        }
+        break;
+      case 3:
+        if (this.bot_choice == 3) {
+          this.resutls.color = 'black'
+          this.resutls.txt = 'Draw +0'
+        }
+        if (this.bot_choice == 1) {
+          this.resutls.color = 'red'
+          this.resutls.txt = 'Lost -1'
+        }
+        if (this.bot_choice == 2) {
+          this.resutls.color = 'green'
+          this.resutls.txt = 'WIN +1'
+        }
+        break;
+      default:
+        alert('Error Logic');
+        break;
+    }
+  }
+
+
+  public bot_generate() {
+    this.bot_choice = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+  }
+
 
   public decrese() {
     this.counter -= 1;

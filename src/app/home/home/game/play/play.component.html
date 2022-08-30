@@ -1,6 +1,6 @@
 <div class="mt-5">
   <div class="row">
-    <div class="col-sm-4 ">
+    <div class="col-sm-4">
       <div class="d-flex justify-content-center">
         <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" style="height: 18rem">
       </div>
@@ -28,13 +28,29 @@
     <div class="col-sm-4 d-flex justify-content-center">
       <div style="margin:25% 0%">
         <h1 *ngIf="counter > -1">{{counter}}</h1>
-        <h1 *ngIf="counter == -1" >VS</h1>
+        <h1 *ngIf="counter == -1 && !hide_vs">VS</h1>
+        <h1 [ngStyle]="{'color' : resutls.color}" *ngIf="resutls.txt">{{resutls.txt}}</h1>
       </div>
     </div>
-    <div class="col-sm-4 d-flex justify-content-center">
-      <div>
+    <div class="col-sm-4">
+      <div class="row  d-flex justify-content-center">
         <img src="https://media.discordapp.net/attachments/1012382374631325848/1013882284685926521/Untitled-156456.png"
-             style="height: 18rem">
+             style="height: 18rem; max-width: 20rem">
+        <button class="col-sm-12 btn btn-link btn-sm" *ngIf="bot_choice == 1">
+          <img src="/assets/images/rock.svg" alt="" width="32" height="32" fill="currentColor">
+          <br>
+          Rock
+        </button>
+        <button class="col-sm-12 btn btn-link btn-sm" *ngIf="bot_choice == 2">
+          <img src="/assets/images/paper.svg" alt="" width="32" height="32" fill="currentColor">
+          <br>
+          Paper
+        </button>
+        <button class="col-sm-12 btn btn-link btn-sm" *ngIf="bot_choice == 3">
+          <img src="/assets/images/scisor.svg" alt="" width="32" height="32" fill="currentColor">
+          <br>
+          Scissors
+        </button>
       </div>
     </div>
   </div>
