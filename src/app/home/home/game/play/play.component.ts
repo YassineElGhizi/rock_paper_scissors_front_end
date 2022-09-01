@@ -124,10 +124,10 @@ export class PlayComponent implements OnInit {
       u.token = user.token;
     })
 
-    const headers = {'content-type': 'application/json'}
+    const headers = {'content-type': 'application/json', 'token': u.token as string}
     let game_score = {'user_id': u.id, 'user_name': u.name, 'game_score': decision}
 
-    this.http.post(environment.base_api_url + 'test', JSON.stringify(game_score), {
+    this.http.post(environment.base_api_url + 'game', JSON.stringify(game_score), {
       'headers': headers,
       observe: 'response'
     }).subscribe(
