@@ -23,10 +23,15 @@ export class LoginService {
   public http_error = new BehaviorSubject(new HttpError(false, 'some error'));
   currentHttp_error = this.http_error.asObservable();
 
+  public authenticated = new BehaviorSubject(false);
+  currentAuthenticated = this.authenticated.asObservable();
 
   constructor(public http: HttpClient, private route: ActivatedRoute, private router: Router, public store: Store<UserState>) {
   }
 
+  public set_authenticated(decision: boolean) {
+    this.authenticated.next(decision)
+  }
 
   public set_user_name(name: string) {
     this.user_name.next(name);
@@ -51,8 +56,10 @@ export class LoginService {
           x.name = y.name
           x.img = y.img
           x.token = y.token
+          x.id = y.id
           this.store.dispatch(addUser(x))
-          // this.router.navigate(['/home'])
+          this.router.navigate(['/home'])
+          this.authenticated.next(true)
         },
         error => {
           console.log("Post failed /login with the errors", error);

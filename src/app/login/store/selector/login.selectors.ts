@@ -7,5 +7,5 @@ export const selectUserState = createFeatureSelector<fromUser.UserState>(
 
 export const selectUsers = createSelector(
   selectUserState,
-  (state: fromUser.UserState) => state.users
+  (state: fromUser.UserState) => state.user
 );

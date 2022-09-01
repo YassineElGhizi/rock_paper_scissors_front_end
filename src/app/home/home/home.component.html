@@ -1,2 +1,16 @@
-<app-navbar></app-navbar>
-<app-game></app-game>
+<div *ngIf="authenticated; else a">
+  <app-navbar></app-navbar>
+  <app-game></app-game>
+</div>
+
+<ng-template #a>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="alert alert-danger" role="alert">
+          You Are Not Allowed !
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -5,27 +5,20 @@ import {User} from "../../../models/user";
 export const userFeatureKey = 'user';
 
 export interface UserState {
-  users: User[];
+  user: User;
 }
 
 export const initialState: UserState = {
-  users: []
+  user: {}
 };
 
 
 export const userReducer = createReducer(
   initialState,
   on(UserActions.addUser,
-    (state: UserState, {user}) => ({
-      ...state,
-      users: [...state.users, a(user)]
-    }))
+    (state: UserState, {user}) => ({state, user})
+  )
 );
-
-let a = (user: any) => {
-  console.log('A ::::::::::::::::::::::::::', user)
-  return user
-}
 
 
 export function reducer(state: UserState | undefined, action: Action): any {

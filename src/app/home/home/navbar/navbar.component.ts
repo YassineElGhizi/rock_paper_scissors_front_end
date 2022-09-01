@@ -13,7 +13,7 @@ import {selectUsers} from "../../../login/store/selector/login.selectors";
 })
 export class NavbarComponent implements OnInit {
 
-  public user: any
+  public user: Observable<User>
 
   constructor(private store: Store<UserState>) {
     this.user = this.store.pipe(select(selectUsers));

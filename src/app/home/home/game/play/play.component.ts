@@ -1,4 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import {select, Store} from "@ngrx/store";
+import {UserState} from "../../../../login/store/reducer/login.reducer";
+import {selectUsers} from "../../../../login/store/selector/login.selectors";
+import {User} from "../../../../models/user";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-play',
@@ -13,8 +20,10 @@ export class PlayComponent implements OnInit {
   bot_choice = -1;
   last_win = false;
 
+  public user: Observable<User>
 
-  constructor() {
+  constructor(private store: Store<UserState>, public http: HttpClient) {
+    this.user = this.store.pipe(select(selectUsers));
   }
 
   ngOnInit(): void {
@@ -45,16 +54,19 @@ export class PlayComponent implements OnInit {
           this.resutls.color = 'black'
           this.resutls.txt = 'Draw +0'
           this.last_win = false
+          this.postResults(0)
         }
         if (this.bot_choice == 2) {
           this.resutls.color = 'red'
           this.resutls.txt = 'Lost -1'
           this.last_win = false
+          this.postResults(-1)
         }
         if (this.bot_choice == 3) {
           this.resutls.color = 'green'
           this.resutls.txt = 'WIN +1'
           this.last_win = true
+          this.postResults(1)
         }
         break;
       case 2:
@@ -62,16 +74,19 @@ export class PlayComponent implements OnInit {
           this.resutls.color = 'black'
           this.resutls.txt = 'Draw +0'
           this.last_win = false
+          this.postResults(0)
         }
         if (this.bot_choice == 3) {
           this.resutls.color = 'red'
           this.resutls.txt = 'Lost -1'
           this.last_win = false
+          this.postResults(-1)
         }
         if (this.bot_choice == 1) {
           this.resutls.color = 'green'
           this.resutls.txt = 'WIN +1'
           this.last_win = true
+          this.postResults(1)
         }
         break;
       case 3:
@@ -79,16 +94,19 @@ export class PlayComponent implements OnInit {
           this.resutls.color = 'black'
           this.resutls.txt = 'Draw +0'
           this.last_win = false
+          this.postResults(0)
         }
         if (this.bot_choice == 1) {
           this.resutls.color = 'red'
           this.resutls.txt = 'Lost -1'
           this.last_win = false
+          this.postResults(-1)
         }
         if (this.bot_choice == 2) {
           this.resutls.color = 'green'
           this.resutls.txt = 'WIN +1'
           this.last_win = true
+          this.postResults(1)
         }
         break;
       default:
@@ -97,6 +115,26 @@ export class PlayComponent implements OnInit {
     }
   }
 
+  public postResults(decision: number) {
+    let u = new User();
+    this.user.subscribe(user => {
+      u.id = user.id;
+      u.name = user.name;
+      u.img = user.img;
+      u.token = user.token;
+    })
+
+    const headers = {'content-type': 'application/json'}
+    let game_score = {'user_id': u.id, 'user_name': u.name, 'game_score': decision}
+
+    this.http.post(environment.base_api_url + 'test', JSON.stringify(game_score), {
+      'headers': headers,
+      observe: 'response'
+    }).subscribe(
+      response => console.log(" RES0 => ", response.body)
+    )
+
+  }
 
   public bot_generate() {
     this.bot_choice = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
