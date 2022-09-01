@@ -3,12 +3,11 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {HttpError} from "../../models/http-error";
-import {select, Store} from "@ngrx/store";
-import {LoginState} from "../store/reducer/login.reducer";
-import {selectLogin} from "../store/selector/login.selectors";
+import {Store} from "@ngrx/store";
 import {User} from "../../models/user";
-import {addLogin} from "../store/action/login.actions";
 import {ActivatedRoute, Router} from "@angular/router";
+import {UserState} from "../store/reducer/login.reducer";
+import {addUser} from "../store/action/login.actions";
 
 
 @Injectable({
@@ -21,14 +20,11 @@ export class LoginService {
   public passwd = new BehaviorSubject('');
   currentPasswd = this.passwd.asObservable();
 
-  user$: Observable<User>;
-
   public http_error = new BehaviorSubject(new HttpError(false, 'some error'));
   currentHttp_error = this.http_error.asObservable();
 
 
-  constructor(public http: HttpClient, private store: Store<LoginState>, private route: ActivatedRoute, private router: Router) {
-    this.user$ = this.store.pipe(select(selectLogin))
+  constructor(public http: HttpClient, private route: ActivatedRoute, private router: Router, public store: Store<UserState>) {
   }
 
 
@@ -44,15 +40,19 @@ export class LoginService {
 
     const headers = {'content-type': 'application/json'}
     const body = JSON.stringify({'name': name, 'password': password});
+    let x = new User();
 
     this.http.post(environment.base_api_url + 'login', body, {'headers': headers, observe: 'response'})
       .subscribe(
         response => {
           this.setHttpError(false, '')
-          console.log("data", response.body)
-          let u = response.body as User;
-          this.store.dispatch(addLogin(u));
-          this.router.navigate(['/home'])
+          console.log("res data  /login ", response.body)
+          let y = response.body as User
+          x.name = y.name
+          x.img = y.img
+          x.token = y.token
+          this.store.dispatch(addUser(x))
+          // this.router.navigate(['/home'])
         },
         error => {
           console.log("Post failed /login with the errors", error);
@@ -70,10 +70,7 @@ export class LoginService {
       )
   }
 
-
   public setHttpError(state: boolean, msg: string) {
     this.http_error.next(new HttpError(state, msg));
   }
-
-
 }

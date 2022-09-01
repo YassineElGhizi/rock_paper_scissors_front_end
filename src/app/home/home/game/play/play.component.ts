@@ -102,7 +102,6 @@ export class PlayComponent implements OnInit {
     this.bot_choice = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
   }
 
-
   public decrese() {
     this.counter -= 1;
   }

@@ -18,8 +18,8 @@ import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import {HomeComponent} from './home/home/home.component';
 import {NavbarComponent} from './home/home/navbar/navbar.component';
 import {GameComponent} from './home/home/game/game.component';
-import { PlayComponent } from './home/home/game/play/play.component';
-
+import {PlayComponent} from './home/home/game/play/play.component';
+import {userFeatureKey, reducer} from "./login/store/reducer/login.reducer";
 
 
 const appRoutes: Routes = [
@@ -44,6 +44,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, {metaReducers}),
+    StoreModule.forFeature(userFeatureKey, reducer),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     RouterModule.forRoot(
       appRoutes,

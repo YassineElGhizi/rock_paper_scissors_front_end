@@ -1,25 +1,33 @@
 import {Action, createReducer, on} from '@ngrx/store';
-import * as LoginAction from '../action/login.actions';
+import * as UserActions from '../action/login.actions';
 import {User} from "../../../models/user";
 
-export const loginFeatureKey = 'login';
+export const userFeatureKey = 'user';
 
-export interface LoginState {
-  user: User
+export interface UserState {
+  users: User[];
 }
 
-export const initialState: LoginState = {
-  user: {'name': '', 'token': '', 'img': ''}
+export const initialState: UserState = {
+  users: []
 };
 
-export const loginreducer = createReducer(
+
+export const userReducer = createReducer(
   initialState,
-  on(LoginAction.addLogin,
-    (state: LoginState, {user}) => ({state, user})
-  )
+  on(UserActions.addUser,
+    (state: UserState, {user}) => ({
+      ...state,
+      users: [...state.users, a(user)]
+    }))
 );
 
+let a = (user: any) => {
+  console.log('A ::::::::::::::::::::::::::', user)
+  return user
+}
 
-export function reducer(state: LoginState | undefined, action: Action): any {
-  return loginreducer(state, action);
+
+export function reducer(state: UserState | undefined, action: Action): any {
+  return userReducer(state, action);
 }

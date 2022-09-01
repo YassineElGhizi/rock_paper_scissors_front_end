@@ -23,10 +23,7 @@ export class LoginComponent implements OnInit {
       this.http_error.status = he.status;
       this.http_error.msg = he.msg;
     })
-
-
   }
-
 
   public login() {
     this.loginService.postData(this.user_name, this.passwd)
