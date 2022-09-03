@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {select, Store} from "@ngrx/store";
-import {UserState} from "../../login/store/reducer/login.reducer";
 import {LoginService} from "../../login/service/login.service";
 import {Router} from "@angular/router";
 

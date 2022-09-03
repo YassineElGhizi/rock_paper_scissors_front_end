@@ -20,6 +20,7 @@ import {NavbarComponent} from './home/home/navbar/navbar.component';
 import {GameComponent} from './home/home/game/game.component';
 import {PlayComponent} from './home/home/game/play/play.component';
 import {userFeatureKey, reducer} from "./login/store/reducer/login.reducer";
+import {game_reducer, gameFeatureKey} from "./home/home/store/reducer/game.reducer";
 
 
 const appRoutes: Routes = [
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     StoreModule.forFeature(userFeatureKey, reducer),
+    StoreModule.forFeature(gameFeatureKey, game_reducer),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     RouterModule.forRoot(
       appRoutes,

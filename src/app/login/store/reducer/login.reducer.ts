@@ -12,14 +12,12 @@ export const initialState: UserState = {
   user: {}
 };
 
-
 export const userReducer = createReducer(
   initialState,
   on(UserActions.addUser,
     (state: UserState, {user}) => ({state, user})
   )
 );
-
 
 export function reducer(state: UserState | undefined, action: Action): any {
   return userReducer(state, action);

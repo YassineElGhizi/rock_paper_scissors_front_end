@@ -1,5 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Chart, registerables} from "chart.js";
+import {GameService} from "../service/game.service";
+import {select, Store} from "@ngrx/store";
+import {UserState} from "../../../login/store/reducer/login.reducer";
+import {selectUsers} from "../../../login/store/selector/login.selectors";
+import {Observable} from "rxjs";
+import {User} from "../../../models/user";
+import {GameState} from "../store/reducer/game.reducer";
+import {Game} from "../../../models/game";
+import {selectGames} from "../store/selector/game.selectors";
 
 
 @Component({
@@ -11,18 +20,45 @@ export class GameComponent implements OnInit {
 
   chart: any = []
 
-  constructor() {
+  public user: Observable<User>;
+  public game$: Observable<Game>;
+
+  constructor(public gameService: GameService, public store: Store<UserState>, public game_store: Store<GameState>) {
+    this.user = this.store.pipe(select(selectUsers));
+    this.game$ = this.game_store.pipe(select(selectGames));
     Chart.register(...registerables)
   }
 
+
   ngOnInit(): void {
+    let id: number | undefined;
+    this.user.subscribe(
+      user => {
+        id = user.id
+      }
+    )
+    this.gameService.getData(id)
+    let win: number | undefined;
+    let draw: number | undefined;
+    let lose: number | undefined;
+    this.game$.subscribe(
+      game => {
+        win = game.win
+        draw = game.draw
+        lose = game.lose
+      }
+    )
+    console.log("win = ", win)
+    console.log("draw = ", draw)
+    console.log("lose = ", lose)
+
     this.chart = new Chart('canvas', {
       type: 'doughnut',
       data: {
         labels: ['Win', 'Draw', 'Lose'],
         datasets: [{
           label: '# of Votes',
-          data: [12, 19, 3,],
+          data: [win, draw, lose],
           backgroundColor: [
             '#4BC0C0',
             '#36A2EB',
@@ -47,5 +83,5 @@ export class GameComponent implements OnInit {
       }
     })
   }
-
+  
 }
