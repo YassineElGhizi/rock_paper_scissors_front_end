@@ -6,6 +6,7 @@ import {User} from "../../../../models/user";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../environments/environment";
+import {GameService} from "../../service/game.service";
 
 @Component({
   selector: 'app-play',
@@ -22,7 +23,7 @@ export class PlayComponent implements OnInit {
 
   public user: Observable<User>
 
-  constructor(private store: Store<UserState>, public http: HttpClient) {
+  constructor(private store: Store<UserState>, public http: HttpClient, public gameService: GameService) {
     this.user = this.store.pipe(select(selectUsers));
   }
 
@@ -38,13 +39,8 @@ export class PlayComponent implements OnInit {
       await this.fx_fost_fx()
     }
 
-    console.log('1: ', this.bot_choice)
     await this.bot_generate()
-    console.log('2: ', this.bot_choice)
     await this.my_switch_case(ch)
-    console.log('3: ', this.bot_choice)
-
-
   }
 
   public my_switch_case(x: number) {
@@ -131,7 +127,7 @@ export class PlayComponent implements OnInit {
       'headers': headers,
       observe: 'response'
     }).subscribe(
-      response => console.log(" RES0 => ", response.body)
+      response => this.gameService.getData(u.id)
     )
 
   }

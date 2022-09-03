@@ -37,10 +37,13 @@ export class GameComponent implements OnInit {
         id = user.id
       }
     )
+    console.log("#1")
     this.gameService.getData(id)
+    console.log("#2")
     let win: number | undefined;
     let draw: number | undefined;
     let lose: number | undefined;
+
     this.game$.subscribe(
       game => {
         win = game.win
@@ -48,10 +51,6 @@ export class GameComponent implements OnInit {
         lose = game.lose
       }
     )
-    console.log("win = ", win)
-    console.log("draw = ", draw)
-    console.log("lose = ", lose)
-
     this.chart = new Chart('canvas', {
       type: 'doughnut',
       data: {
@@ -68,7 +67,6 @@ export class GameComponent implements OnInit {
             '#39c7c7',
             '#1e9df3',
             '#ff3762',
-
           ],
           borderWidth: 1
         }]
@@ -83,5 +81,7 @@ export class GameComponent implements OnInit {
       }
     })
   }
-  
+
+
 }
+
