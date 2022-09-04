@@ -4,7 +4,7 @@ import {GameService} from "../service/game.service";
 import {select, Store} from "@ngrx/store";
 import {UserState} from "../../../login/store/reducer/login.reducer";
 import {selectUsers} from "../../../login/store/selector/login.selectors";
-import {Observable} from "rxjs";
+import {distinctUntilChanged, Observable} from "rxjs";
 import {User} from "../../../models/user";
 import {GameState} from "../store/reducer/game.reducer";
 import {Game} from "../../../models/game";
@@ -27,6 +27,9 @@ export class GameComponent implements OnInit {
     this.user = this.store.pipe(select(selectUsers));
     this.game$ = this.game_store.pipe(select(selectGames));
     Chart.register(...registerables)
+
+    this.game$.pipe(distinctUntilChanged()).subscribe(data => this.hamza())
+
   }
 
 
@@ -51,6 +54,56 @@ export class GameComponent implements OnInit {
         lose = game.lose
       }
     )
+
+    setTimeout(() => {
+      this.chart = new Chart('canvas', {
+        type: 'doughnut',
+        data: {
+          labels: ['Win', 'Draw', 'Lose'],
+          datasets: [{
+            label: '# of Votes',
+            data: [win, draw, lose],
+            backgroundColor: [
+              '#4BC0C0',
+              '#36A2EB',
+              '#FF6384',
+            ],
+            borderColor: [
+              '#39c7c7',
+              '#1e9df3',
+              '#ff3762',
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              display: false
+            }
+          }
+        }
+      })
+    }, 300)
+  }
+
+
+  public hamza() {
+    this.chart.destroy()
+
+    let win: number | undefined;
+    let draw: number | undefined;
+    let lose: number | undefined;
+
+    this.game$.subscribe(
+      game => {
+        win = game.win
+        draw = game.draw
+        lose = game.lose
+      }
+    )
+
     this.chart = new Chart('canvas', {
       type: 'doughnut',
       data: {
@@ -81,7 +134,6 @@ export class GameComponent implements OnInit {
       }
     })
   }
-
 
 }
 
