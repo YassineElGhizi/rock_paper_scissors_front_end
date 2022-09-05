@@ -1,15 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0rem 2rem;">
   <div class="container-fluid">
-    <div>
-      <!--      <div class="justify-content-center" *ngFor="let user of user | async">-->
+    <div >
+
       <div class="justify-content-center">
         <img class="rounded-circle z-depth-2" alt="100x100"
              [src]="(user | async)?.img"
-             data-holder-rendered="true" style="max-height: 4rem; margin-left: 25%">
+             data-holder-rendered="true" style="max-height: 4rem; margin-left: 35%">
+        
+          <h3>{{(user | async)?.name}}</h3>
+
       </div>
-      <div>
-        <h3>{{(user | async)?.name}}</h3>
-      </div>
+
     </div>
 
 

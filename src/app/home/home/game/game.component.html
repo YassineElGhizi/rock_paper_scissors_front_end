@@ -9,13 +9,13 @@
 
     <div class="col-sm-12 col-lg-7">
       <div class="row">
-        <h6>Totale Games : </h6> <span class="badge bg-secondary">{{(game$ | async)?.total_items}} Game</span>
+        <h6>Totale Games : </h6> <span class="badge bg-secondary">{{(game$ | async)?.total_items || 0}} Game</span>
 
       </div>
       <div class="row">
-        <div class="col-4">Win : <span class="badge bg-success">{{(game$ | async)?.win}}</span></div>
-        <div class="col-4">Draw : <span class="badge bg-warning text-dark">{{(game$ | async)?.draw}}</span></div>
-        <div class="col-4">Lose : <span class="badge bg-danger">{{(game$ | async)?.lose}}</span></div>
+        <div class="col-4">Win : <span class="badge bg-success">{{(game$ | async)?.win || 0}}</span></div>
+        <div class="col-4">Draw : <span class="badge bg-warning text-dark">{{(game$ | async)?.draw || 0}}</span></div>
+        <div class="col-4">Lose : <span class="badge bg-danger">{{(game$ | async)?.lose || 0}}</span></div>
       </div>
     </div>
   </div>
