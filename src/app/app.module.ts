@@ -21,12 +21,14 @@ import {GameComponent} from './home/home/game/game.component';
 import {PlayComponent} from './home/home/game/play/play.component';
 import {userFeatureKey, reducer} from "./login/store/reducer/login.reducer";
 import {game_reducer, gameFeatureKey} from "./home/home/store/reducer/game.reducer";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
+  {path: 'ranking', component: DashboardComponent},
 
 ];
 
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
     NavbarComponent,
     GameComponent,
     PlayComponent,
+    DashboardComponent,
 
   ],
   imports: [

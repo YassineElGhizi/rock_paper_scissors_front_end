@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
           localStorage.setItem("img", <string>user.img);
           localStorage.setItem("token", <string>user.token);
           localStorage.setItem("name", <string>user.name);
+          this.authenticated = true
         } else {
           id = localStorage.getItem("id")
           img = localStorage.getItem("img")
@@ -54,10 +55,6 @@ export class HomeComponent implements OnInit {
         }
       }
     )
-
-  }
-
-  public save_data = () => {
 
   }
 
