@@ -1,45 +1,45 @@
 <app-navbar></app-navbar>
 <div class="container mt-5">
-
-
-  <div class="card">
-    <div class="card-header">
-      <div class="row">
-        <div class="col-sm-12 col-md-3">
-          Note that :
-        </div>
-        <div class="col-sm-12 col-md-4 d-flex justify-content-center">
-          <div style="background: #e2e2ea; border-radius: 15%" >
-            Score =  3 x <span class="badge rounded-pill bg-success">Win</span> + 1 x <span
-            class="badge rounded-pill bg-warning text-dark">Draw</span>
+  <div class="row">
+    <div class="card">
+      <div class="card-header">
+        <div class="d-flex justify-content-center">
+          <div style=" border-radius: 15%">
+            Score = 3 x <span class="badge rounded-pill bg-success">Win</span> + 1 x <span
+            class="badge rounded-pill bg-warning bg-warning">Draw</span>
           </div>
         </div>
       </div>
-
-
-
-    </div>
-    <div class="card-body">
-      <table class="table">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col"><span class="badge bg-success">Win</span></th>
-          <th scope="col"><span class="badge bg-warning">Draw</span></th>
-          <th scope="col"><span class="badge bg-danger">Lose</span></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>@fat</td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col"><span class="badge bg-success">Win</span></th>
+            <th scope="col"><span class="badge bg-warning">Draw</span></th>
+            <th scope="col"><span class="badge bg-danger">Lose</span></th>
+            <th scope="col"><span class="badge" style="background: deeppink">Score</span></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let r of rank; let i=index">
+            <th scope="row">{{i + 1}}</th>
+            <td>
+              <img class="rounded-circle z-depth-2" [src]="r.user_img" style="max-width: 2rem;">
+              {{r.user_name}}
+            </td>
+            <td>{{r.wins}}</td>
+            <td>{{r.draws}}</td>
+            <td class="d-none d-md-block d-print-block">{{r.loses}}</td>
+            <td>{{r.score}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+      </div>
     </div>
   </div>
+
 </div>
