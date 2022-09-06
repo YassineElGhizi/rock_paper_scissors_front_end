@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="render_navbar" ></app-navbar>
 <div class="container mt-5">
   <div class="row">
     <div class="card">
@@ -31,7 +31,7 @@
             </td>
             <td>{{r.wins}}</td>
             <td>{{r.draws}}</td>
-            <td class="d-none d-md-block d-print-block">{{r.loses}}</td>
+            <td >{{r.loses}}</td>
             <td>{{r.score}}</td>
           </tr>
           </tbody>

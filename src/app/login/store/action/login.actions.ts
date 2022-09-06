@@ -5,3 +5,7 @@ export const addUser = createAction(
   '[User] Add User',
   (user: User) => ({user})
 );
+
+export const logout = createAction(
+  '[User] Logout User'
+);
