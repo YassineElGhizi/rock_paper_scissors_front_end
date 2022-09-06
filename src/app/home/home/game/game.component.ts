@@ -64,14 +64,14 @@ export class GameComponent implements OnInit {
             label: '# of Votes',
             data: [win, draw, lose],
             backgroundColor: [
-              '#4BC0C0',
-              '#36A2EB',
-              '#FF6384',
+              '#18da7b',
+              '#179af8',
+              'rgba(255,20,147,0.93)',
             ],
             borderColor: [
               '#39c7c7',
               '#1e9df3',
-              '#ff3762',
+              '#FF1493',
             ],
             borderWidth: 1
           }]
