@@ -3,7 +3,7 @@ import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Store} from "@ngrx/store";
 import {GameState} from "../store/reducer/game.reducer";
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../../../environments/environment.prod";
 import {Game} from "../../../models/game";
 import {insertGames} from "../store/action/game.actions";
 

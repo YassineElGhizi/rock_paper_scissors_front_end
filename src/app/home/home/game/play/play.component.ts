@@ -5,7 +5,7 @@ import {selectUsers} from "../../../../login/store/selector/login.selectors";
 import {User} from "../../../../models/user";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../../../environments/environment";
+import {environment} from "../../../../../environments/environment.prod";
 import {GameService} from "../../service/game.service";
 
 @Component({
